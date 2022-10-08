@@ -6,11 +6,23 @@ class PopupWithForm extends React.Component {
         super(props);
     }
 
+    componentDidUpdate = () => {
+        if (this.props.isOpen) {
+            const handleESC = (e) => {
+                if (e.key === "Escape") {
+                    this.props.onClose();
+                    document.removeEventListener("keydown", handleESC);
+                }
+            }
+            document.addEventListener("keydown", handleESC);
+        }
+    }
+
     handleOverlayClose = (e) => {
         if (e.target === e.currentTarget && this.props.isOpen) {
-          this.props.onClose();
+            this.props.onClose();
         }
-      };
+    };
 
     render() {
         return (

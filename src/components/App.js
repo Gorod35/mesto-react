@@ -1,5 +1,4 @@
 import React from 'react';
-import '../index.css';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -7,12 +6,6 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 function App() {
-
-    const handleEscapeClose = (event) => {
-        if (event.key === "Escape") {
-            closeAllPopups();
-        }
-    };
 
 
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -24,17 +17,14 @@ function App() {
 
     const handleEditAvatarClick = () => {
         setIsEditAvatarPopupOpen(true);
-        document.addEventListener("keydown", handleEscapeClose);
     }
 
     const handleEditProfileClick = () => {
         setIsEditProfilePopupOpen(true);
-        document.addEventListener("keydown", handleEscapeClose);
     }
 
     const handleAddPlaceClick = () => {
         setIsAddPlacePopupOpen(true);
-        document.addEventListener("keydown", handleEscapeClose);
     }
 
 
@@ -42,9 +32,7 @@ function App() {
         setSelectedCard({
             isOpen: true,
             ...card
-          })
-        document.addEventListener("keydown", handleEscapeClose);
-        
+          })        
     }
 
     const closeAllPopups = () => {
@@ -52,7 +40,6 @@ function App() {
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
         setSelectedCard({isOpen: false});
-        document.removeEventListener("keydown", handleEscapeClose);
     };
 
 
