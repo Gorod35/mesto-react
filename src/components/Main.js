@@ -29,7 +29,7 @@ class Main extends React.Component {
 
             // console.log(this.state.cards);
             // console.log(newCard);
-            this.cards = this.state.cards.map((c) => c.props.card._id === card._id ? console.log(c) : c);
+            this.cards = this.state.cards.map((c) => c === card._id ? newCard : c);
             this.setState({cards: this.cards});
             
         });
