@@ -62,8 +62,16 @@ class Api {
         .then(this._getResponseData);
     }
 
-    likeCard(cardId) {
-        return fetch(`${this._link}cards/likes/${cardId}`, {
+    changeLikeCardStatus(id, isLiked) {
+        if (!isLiked) {
+           return this.dislikeCard(id);
+        } else {
+           return this.likeCard(id);
+        }
+     }
+
+    likeCard(id) {
+        return fetch(`${this._link}cards/likes/${id}`, {
             method: 'PUT',
             headers: this._headers,
         })
@@ -71,8 +79,8 @@ class Api {
         .then(this._getResponseData);
     }
 
-    dislikeCard(cardId) {
-        return fetch(`${this._link}cards/likes/${cardId}`, {
+    dislikeCard(id) {
+        return fetch(`${this._link}cards/likes/${id}`, {
             method: 'DELETE',
             headers: this._headers,
         })
