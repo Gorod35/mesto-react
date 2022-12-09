@@ -1,7 +1,7 @@
 import React from 'react';
 import { api } from '../utils/Api';
 import Card from './Card';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { currentUser, CurrentUserContext } from '../contexts/CurrentUserContext';
 
 class Main extends React.Component {
 
@@ -10,45 +10,17 @@ class Main extends React.Component {
         this.state = {
             userName: '',
             userDescription: '',
-            userAvatar: '',
-            cards: []
+            userAvatar: ''
         }
     }
 
     static contextType = CurrentUserContext;
 
-    handleCardLike = (card) => {
-        this.isLiked = card.likes.some(i => i._id === this.context._id);
 
-        api.changeLikeCardStatus(card._id, !this.isLiked).then((newCard) => {
-            // this.setState((state) => {
-            //     return {
-            //         cards: state.cards.map((c) => c._id === card._id ? newCard : c)
-            //     }
-            // })
-
-            // console.log(this.state.cards);
-            // console.log(newCard);
-            this.cards = this.state.cards.map((c) => c === card._id ? newCard : c);
-            this.setState({cards: this.cards});
-            
+    deleteCards(card) {
+        return this.state.cards.filter((c) => {
+            return c._id !== card._id;
         });
-    }
-
-    componentDidMount = () => {
-        Promise.all([api.getInitialCards()])
-            .then(([cards]) => {
-                this.setState((state) => {
-                    return {
-                        cards: cards.map((cards) =>
-                            <Card card={cards} key={cards._id} onCardClick={this.props.onCardClick} onCardLike={this.handleCardLike}/>
-                        )
-                    }
-                });
-            })
-            .catch((err) => {
-                console.log('Ошибка. Запрос не выполнен');
-            })
     }
 
     render() {
@@ -73,7 +45,13 @@ class Main extends React.Component {
 
                 <section className="card">
                     <ul className="card__items">
-                        {this.state.cards}
+                        {
+                            this.props.cards.map((card) => {
+                                return (
+                                    <Card key={card._id} card={card} onCardClick={this.props.onCardClick} onCardLike={this.props.onCardLike} onCardDelete={this.props.onCardDelete}/>
+                                );
+                            })
+                        }
                     </ul>
                 </section>
             </main>

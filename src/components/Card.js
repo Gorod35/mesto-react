@@ -9,12 +9,17 @@ class Card extends React.Component {
 
     static contextType = CurrentUserContext;
 
+
     handleLikeClick = () => {
         this.props.onCardLike(this.props.card);
-     }
+    }
+
+    handleDeleteClick = () => {
+        this.props.onCardDelete(this.props.card);
+    }
 
     isOwn = () => {
-         return (this.props.card.owner._id === this.context._id)
+        return (this.props.card.owner._id === this.context._id)
     }
 
     isLiked = () => {
@@ -37,7 +42,7 @@ class Card extends React.Component {
         return (
             <li className="card__item">
                 <img src={this.props.card.link} alt={this.props.card.name} className="card__image" onClick={this.handleClick} />
-                <button className={`${this.cardDeleteButtonClassName()}`}></button>
+                <button className={`${this.cardDeleteButtonClassName()}`} onClick={this.handleDeleteClick}></button>
                 <div className="card__description">
                     <h2 className="card__title">{this.props.card.name}</h2>
                     <div className="card__container">
