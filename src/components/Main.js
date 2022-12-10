@@ -1,5 +1,4 @@
 import React from 'react';
-import { api } from '../utils/Api';
 import Card from './Card';
 import { currentUser, CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -15,7 +14,6 @@ class Main extends React.Component {
     }
 
     static contextType = CurrentUserContext;
-
 
     deleteCards(card) {
         return this.state.cards.filter((c) => {

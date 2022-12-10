@@ -3,7 +3,6 @@ import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup(props) {
 
-
     const ref = useRef();
 
     const handleSubmit = (e) => {

@@ -24,7 +24,6 @@ class ImagePopup extends React.Component {
         }
     };
 
-
     render() {
         return (
             <div className={`popup popup_zoom-photo' ${this.props.card.isOpen ? 'popup__opened' : ''}`} onClick={this.handleOverlayClose}>

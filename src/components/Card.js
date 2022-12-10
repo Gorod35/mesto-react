@@ -9,7 +9,6 @@ class Card extends React.Component {
 
     static contextType = CurrentUserContext;
 
-
     handleLikeClick = () => {
         this.props.onCardLike(this.props.card);
     }
